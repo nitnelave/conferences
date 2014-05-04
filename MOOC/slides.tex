@@ -1,0 +1,71 @@
+\documentclass{beamer}
+
+\usepackage[english]{babel}
+\usepackage{color}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{pgfgantt}
+
+\usetheme{Frankfurt}
+\setbeamercovered{transparent}
+
+\newlength{\wideitemsep}
+\setlength{\wideitemsep}{\itemsep}
+\addtolength{\wideitemsep}{5pt}
+\let\olditem\item
+\renewcommand{\item}{\setlength{\itemsep}{\wideitemsep}\olditem}
+
+
+
+\title{MOOC}
+\author{Valentin Tolmer}
+\date{}
+\institute{GCONFS -- EPITA 2013}
+
+
+
+\AtBeginSection[]
+{
+  \begin{frame}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+    \includegraphics[height=60pt]{Logo-epita-hd.png}
+\end{frame}
+
+\begin{frame}
+  \tableofcontents[pausesections ]
+\end{frame}
+
+\input{intro.tex}
+
+\input{educ.tex}
+
+\input{issues.tex}
+
+\input{info.tex}
+
+\section{Conclusion}
+\setcounter{subsection}{1}
+\begin{frame}
+\frametitle{Conclusion}
+  \begin{itemize}[<+->]
+    \item Speading knowledge
+    \item Different approach to learning
+    \item Needs to evolve
+    \item Stronger technological integration
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Questions}
+  Questions?
+\end{frame}
+
+\end{document}
