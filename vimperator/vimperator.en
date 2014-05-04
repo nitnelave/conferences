@@ -1,0 +1,36 @@
+== VIMPERATOR ==
+
+Plugin for Firefox.
+Removes GUI (menu, bookmarks, ...) except tab bar.
+Vim-like command line.
+Online :help.
+
+Pentadactyl: fork of Vimperator
+
+Normal mode
+Hint mode
+Command line mode
+Caret mode
+Visual mode
+TextArea mode
+
+
+Tips and Tricks:
+└─> Selecting text to paste outside
+  └─> Search for the text
+  └─> Switch to caret mode
+  └─> Switch to visual mode
+  └─> Select with the usual movement keys
+└─> Change tabs
+  └─> With name
+  └─> With number
+  └─> With shortcuts (next, prev)
+└─> ;? => info on a link
+└─> :downloads => list of downloads.
+└─> Search keywords
+
+Other nice plugins:
+└─> ABP
+└─> Blank Your Monitor
+
+Plugins for Vimperator

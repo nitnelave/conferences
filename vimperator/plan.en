@@ -1,0 +1,39 @@
+== VIMPERATOR ==
+
+Intro:
+└─> Customize your tools to be more efficient/nicer to use
+
+What is Vimperator?
+└─> Plugin
+└─> Drastic interface change
+└─> Vim inspired
+
+Why do you need it?
+└─> No mouse
+└─> Faster browsing
+
+How is it used?
+└─> Different modes, like Vim
+  └─> Normal
+  └─> Command
+  └─> TextArea
+  └─> Visual and Caret
+  └─> Hint
+└─> Keyboard shortcuts conflicts
+
+Pentadactyl
+
+Tips and Tricks
+└─> Selecting text
+└─> Change tabs
+└─> ;?
+└─> :downloads
+└─> :help
+└─> Search keywords
+└─> Marks
+└─> mappings
+└─> Javascript
+└─> ...
+
+Conclusion
+└─> Other plugins: Blank your monitor
