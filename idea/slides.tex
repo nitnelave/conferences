@@ -1,0 +1,70 @@
+\documentclass{beamer}
+
+\usepackage[english]{babel}
+\usepackage{color}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{pgfgantt}
+\usepackage[official]{eurosym}
+
+\usetheme{Frankfurt}
+\setbeamercovered{transparent}
+
+\newlength{\wideitemsep}
+\setlength{\wideitemsep}{\itemsep}
+\addtolength{\wideitemsep}{5pt}
+\let\olditem\item
+\renewcommand{\item}{\setlength{\itemsep}{\wideitemsep}\olditem}
+
+
+
+\title{IntelliJ IDEA}
+\author{Valentin Tolmer}
+\date{}
+\institute{GCONFS -- EPITA 2014}
+
+
+
+\AtBeginSection[]
+{
+  \begin{frame}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+    \includegraphics[height=60pt]{Logo-idea.png}
+    \hfill
+    \includegraphics[height=60pt]{Logo-epita.png}
+\end{frame}
+
+\begin{frame}
+  \tableofcontents[pausesections ]
+\end{frame}
+
+\input{intro.tex}
+
+\input{features.tex}
+
+\section{Conclusion}
+\begin{frame}
+\frametitle{Advice}
+  \begin{itemize}
+    \item Give it a try
+    \item Take some time to customize it
+    \item Save your settings!
+    \item If you find something missing, first look for it in the menus, the
+    help, or internet, then suggest it to the devs
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Questions}
+  Questions?
+\end{frame}
+
+\end{document}
