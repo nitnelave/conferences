@@ -1,0 +1,45 @@
+== JOOMLA ==
+
+Second most used CMS after WordPress.
+Downloaded 35 million times
+6000 free/paying extensions
+
+Parallel dev of the 2.5 (LTS) and the 3.2 (Latest stable) version
+
+History:
+└─> Fork of Mambo (2005)
+  └─> Open Source Matters website
+└─> Joomla! is taken from the Swahili "all together, as a whole"
+
+Used by Ebay, Ikea, Linux.com, Peugeot...
+
+Open Source, under GNU General Public License
+
+Model-view-controller framework
+
+PHP with OOP
+Databases:
+└─> MySQL
+└─> MS SQL
+└─> PostgreSQL
+
+Features:
+└─> Users and authentication
+└─> Media manager
+└─> Language support
+└─> Content Management
+└─> Templates
+└─> RSS feeds
+└─> Technical features
+  └─> Page or module caching
+  └─> Page compression on the fly
+  └─> Debugging facilities
+  └─> Private messaging system
+
+Installation included in many hosts' control panel.
+
+Templates: Content separated from looks. Easy to change.
+
+Components: Main part of the page
+Plugins: event handlers
+Modules: boxes of new functionalities

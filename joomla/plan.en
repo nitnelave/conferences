@@ -1,0 +1,42 @@
+== JOOMLA ==
+
+
+What is Joomla?
+└─> CMS
+└─> Open Source
+└─> Versatile
+└─> Often used
+
+What can it do?
+└─> Content Management
+  └─> Articles
+  └─> Media
+└─> Dynamic content
+  └─> PHP/HTML5, etc.
+└─> Adapted for news
+  └─> list of latest articles
+  └─> RSS feeds
+└─> User management
+  └─> Different user privileges
+  └─> Secure authentication
+
+How can you use it?
+└─> Easy to set up
+└─> Easy to use for non tech-savvy users
+└─> Modularity:
+  └─> Components
+  └─> Modules
+  └─> Plugins
+  └─> Templates
+  └─> Languages
+└─> Managing articles:
+  └─> MVC
+  └─> Sections
+  └─> Categories
+  └─> Presentation
+└─> Managing users
+  └─> Visitor
+  └─> Registered
+  └─> Author
+  └─> Editor
+  └─> Administrator
