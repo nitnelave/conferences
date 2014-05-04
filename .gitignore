@@ -32,3 +32,5 @@ out
 *.dvi
 *.snm
 *.toc
+*.out
+*.vrb
