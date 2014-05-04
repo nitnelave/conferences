@@ -1,0 +1,87 @@
+\section{Modules}
+\setcounter{subsection}{1}
+\begin{frame}
+\frametitle{Project's modules}
+  Project cut in modules:
+  \begin{itemize}[<+->]
+    \item Reader (abisaa\_e)
+    \item Lexer (lefaur\_j)
+    \item Parser (lewjow\_a)
+    \item Execution (froger\_a)
+    \item Test suite (tolmer\_v)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \hspace*{-32pt}
+    \includegraphics[scale = 0.17]{slides/dot.png}
+\end{frame}
+
+\begin{frame}
+\frametitle{Compilation}
+  \begin{itemize}[<+->]
+    \item Supervisor: \textbf{abisaa\_e}
+    \item Autotools
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Interface}
+  \begin{itemize}[<+->]
+    \item Supervisor: \textbf{abisaa\_e}
+    \item Read data from:
+      \begin{itemize}[<+->]
+        \item files
+        \item -c string after program arguments parsing
+        \item users via readline
+      \end{itemize}
+    \item Prompt
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Lexer}
+  \begin{itemize}[<+->]
+    \item Supervisor: \textbf{lefaur\_j}
+    \item Read characters given by interface module or parser
+    \item Cut strings into tokens
+    \item Detect token types (word, keyword, \ldots)
+    \item Give token to parser: read or consume it
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Parser - AST}
+  \begin{itemize}[<+->]
+    \item Supervisor: \textbf{lewkow\_a}
+    \item Parser LALR
+    \item Accept Shell grammar provided by SCL
+    \item Build an abstract syntax tree (AST)
+    \item AST printer
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Execution}
+  \begin{itemize}[<+->]
+    \item Supervisor: \textbf{froger\_a}
+    \item Command execution
+    \item Control flow (if, for, etc \ldots)
+    \item Function handling
+    \item Pipes handling
+    \item History
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Test suite}
+  \begin{itemize}[<+->]
+    \item Supervisor: \textbf{tolmer\_v}
+    \item Scripts in Perl
+      \begin{itemize}[<+->]
+        \item Option formatting
+        \item Tests formatting
+        \item Timeout
+      \end{itemize}
+  \end{itemize}
+\end{frame}

@@ -1,0 +1,56 @@
+\documentclass{beamer}
+
+\usepackage[english]{babel}
+\usepackage{color}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{pgfgantt}
+
+\usetheme{Frankfurt}
+\setbeamercovered{transparent}
+
+\newlength{\wideitemsep}
+\setlength{\wideitemsep}{\itemsep}
+\addtolength{\wideitemsep}{5pt}
+\let\olditem\item
+\renewcommand{\item}{\setlength{\itemsep}{\wideitemsep}\olditem}
+
+\title{42sh}
+\author{
+  tolmer\_v\newline
+  froger\_a\newline
+  abisaa\_e\newline
+  lewkow\_a\newline
+  lefaur\_j}
+\date{}
+
+\AtBeginSection[]
+{
+  \begin{frame}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \tableofcontents[pausesections ]
+\end{frame}
+
+\input{slides/team.tex}
+
+\input{slides/modules.tex}
+
+\input{slides/timeline.tex}
+
+\section{Questions}
+\setcounter{subsection}{1}
+\begin{frame}
+  Questions ?
+\end{frame}
+\end{document}
