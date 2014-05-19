@@ -34,4 +34,10 @@ public class Complete
         return field;
     }
 
+    public void veryLongMethodNameWithCamlCase()
+    {}
+
+    public void veryLongMethodNameToDifferentiate()
+    {}
+
 }
