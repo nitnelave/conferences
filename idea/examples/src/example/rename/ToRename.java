@@ -1,5 +1,7 @@
 package example.rename;
 
+//Rename this class to JohnDoe
+
 /**
  * Class ToRename of package example.rename
  */

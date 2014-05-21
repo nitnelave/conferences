@@ -5,6 +5,7 @@ import java.io.OutputStream;
 /**
  * @author nitnelave
  */
+@SuppressWarnings("UnusedDeclaration")
 public class Complete
 {
     private String field = null;
@@ -27,6 +28,11 @@ public class Complete
         toto(MyEnum.HENRY);
         toto(MyEnum.HENRY);
         toto(MyEnum.HENRY);
+
+        // Context-sensitive completion
+        // call toto()
+
+
     }
 
     public String toto(MyEnum john)
@@ -40,4 +46,16 @@ public class Complete
     public void veryLongMethodNameToDifferentiate()
     {}
 
+    public void test()
+    {
+        // field completion
+
+
+        // Constructor suggestion
+
+
+        // CamlCase completion
+
+
+    }
 }

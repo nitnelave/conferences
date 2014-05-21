@@ -1,17 +1,12 @@
 package example.refactor;
 
-/**
- * Created on 5/19/14
- *
- * @author vtolmer
- */
 @SuppressWarnings("UnusedDeclaration")
 public class ClassRefactor
 {
     private static ClassRefactor instance = null;
-    private String toto;
+    private String toto = null;
 
-    // Singleton (live template geti)
+    // Singleton (live template geti), refactor
 
     public String getToto()
     {
@@ -31,11 +26,16 @@ public class ClassRefactor
                "    {" +
                "        return name;" +
                "    }" +
-               "    public String toString()" +
+               "    @Override " +
+               "    public String ToString()" +
                "    {" +
                "        return this.getName();" +
                "    }" +
                "} ";
+    }
+
+    public class InsideClass {
+        ClassRefactor parent = null;
     }
 
 }
