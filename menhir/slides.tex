@@ -1,0 +1,84 @@
+\documentclass{beamer}
+
+\usepackage[english]{babel}
+\usepackage{color}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{fixltx2e}
+\usepackage{pgfgantt}
+\usepackage[listings,skins]{tcolorbox}
+
+\tcbset{colframe=blue!35!black,colback=blue!20,enlarge top by=5mm,enlarge
+bottom by=5mm}
+\newsavebox{\codebox}
+%\newcommand{\mybox}[2]{
+%  \begin{lrbox}
+%    {\codebox}
+%    \begin{tcblisting}{listing only,title=#1}
+%      #2
+%\end{tcblisting}
+%\end{lrbox}
+%}
+%\renewcommand{\boxed}[2]{\begin{itemize}\end{itemize}}
+
+\usetheme{Frankfurt}
+\setbeamercovered{transparent}
+
+\newlength{\wideitemsep}
+\setlength{\wideitemsep}{\itemsep}
+\addtolength{\wideitemsep}{5pt}
+\let\olditem\item
+\renewcommand{\item}{\setlength{\itemsep}{\wideitemsep}\olditem}
+
+
+
+\title{Menhir}
+\author{Valentin Tolmer}
+\date{}
+\institute{GCONFS -- EPITA 2014}
+
+
+
+\AtBeginSection[]
+{
+  \begin{frame}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+    \includegraphics[height=100pt]{petit-menhir.jpg}
+    \hfill
+    \includegraphics[height=60pt]{logo_epita.jpg}
+\end{frame}
+
+\begin{frame}
+  \tableofcontents[pausesections ]
+\end{frame}
+
+\input{intro.tex}
+
+\input{grammars.tex}
+
+\input{bison.tex}
+
+\section{Conclusion}
+\setcounter{subsection}{1}
+\begin{frame}
+\frametitle{Conclusion}
+  \begin{itemize}[<+->]
+    \item More powerful and flexible
+    \item Uses Ocaml
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Questions}
+  Questions?
+\end{frame}
+
+\end{document}

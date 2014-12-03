@@ -1,0 +1,20 @@
+== MENHIR ==
+
+
+What is Menhir?
+└─> Grammar Parser generator
+└─> OCaml, INRIA
+└─> Successor of ocamlyacc
+└─> Improvements
+
+Basics of grammars
+└─> Lexer, tokens
+└─> rules
+└─> LALR vs LR
+└─> BNF
+
+Comparison with Bison
+└─> parametrized rules
+└─> %inline
+└─> conflict explanation
+└─> split files

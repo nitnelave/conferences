@@ -1,0 +1,50 @@
+\section{Basics of grammars}
+\setcounter{subsection}{1}
+
+
+\begin{frame}
+  \frametitle{What is a grammar?}
+  \textbf{Grammar:} \textit{n.} "The study of how words and their component
+  parts combine to form sentences."
+
+  In computer science, the set of rules that describe a language.
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{What are words?}
+  \begin{itemize}
+    \item Text $\rightarrow$ tokens
+    \item e.g. "function", '=', NUMBER
+    \item It's the role of the lexer
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{What are rules?}
+  \begin{itemize}
+    \item Terminals vs non-terminals
+    \item Transform a series of symbols into a non-terminal
+  \end{itemize}
+\end{frame}
+
+\begin{lrbox}{\codebox}
+  \begin{tcblisting}{listing only,title=Yacc}
+addition: NUMBER PLUS NUMBER
+
+substraction: NUMBER MINUS NUMBER
+
+operation:
+  addition
+| substraction
+\end{tcblisting}
+\end{lrbox}
+\begin{frame}
+\frametitle{Yacc syntax}
+  \begin{itemize}
+    \item early 1970s
+    \item Loosely based on BNF
+  \end{itemize}
+  \usebox{\codebox}
+\end{frame}
