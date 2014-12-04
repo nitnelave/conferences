@@ -21,7 +21,7 @@
 \end{frame}
 
 
-\begin{frame}[fragile]
+\begin{frame}
   \frametitle{What are rules?}
   \begin{itemize}
     \item Terminals vs non-terminals
@@ -38,7 +38,7 @@ substraction: NUMBER MINUS NUMBER
 operation:
   addition
 | substraction
-\end{tcblisting}
+  \end{tcblisting}
 \end{lrbox}
 \begin{frame}
 \frametitle{Yacc syntax}
@@ -47,4 +47,100 @@ operation:
     \item Loosely based on BNF
   \end{itemize}
   \usebox{\codebox}
+\end{frame}
+
+\begin{frame}
+  \frametitle{What is a parser?}
+  \begin{itemize}
+    \item Input: tokens
+    \item "Groups" the token into rules
+    \item Actions (e.g. AST creation)
+  \end{itemize}
+\end{frame}
+
+\begin{lrbox}{\codebox}
+  \begin{tcblisting}{listing only,title=Bison: Basic arithmetics}
+E:
+  E `+' T
+| E `-' T
+| T
+
+T:
+  T `*' F
+| T `/' F
+| F
+
+F:
+  NUMBER
+| `-' F
+| `(' E `)'
+  \end{tcblisting}
+\end{lrbox}
+\begin{frame}
+  \frametitle{Example grammar}
+  \usebox{\codebox}
+\end{frame}
+
+\begin{lrbox}{\codebox}
+  \begin{tcblisting}{listing only,title=Bison: Basic arithmetics}
+E:
+  E `+' T    { $$ = $1 + $3; }
+| E `-' T    { $$ = $1 - $3; }
+| T
+
+T:
+  T `*' F    { $$ = $1 * $3; }
+| T `/' F    { $$ = $1 / $3; }
+| F
+
+F:
+  NUMBER
+| `-' F      { $$ = -$2;     }
+| `(' E `)'  { $$ = $2;      }
+  \end{tcblisting}
+\end{lrbox}
+\begin{frame}
+  \frametitle{With actions}
+  \usebox{\codebox}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Shift/reduce conflicts}
+  \begin{itemize}
+    \item Shift: add the symbol to the stack, not the end of a rule
+    \item Reduce: the top of the stack matches a rule, pop it and add the rule
+    production
+    \item Conflict: both are possible
+  \end{itemize}
+\end{frame}
+
+\begin{lrbox}{\codebox}
+  \begin{tcblisting}{listing only,title=Bison: Dangling else}
+statement:
+  VALUE
+| IF BOOL THEN statement
+| IF BOOL THEN statement ELSE statement
+  \end{tcblisting}
+\end{lrbox}
+\begin{frame}[fragile]
+  \frametitle{Example: dangling else}
+  \usebox{\codebox}
+  Problem:
+
+  \texttt{if a then \only<2->{(}if b then c\only<2>{)} else d\only<3>{)}}
+
+\bigskip
+  Whose \texttt{else} is it?
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Shift/reduce conflict: details}
+  \texttt{[> IF BOOL THEN IF BOOL THEN statement $\rightarrow$ ELSE <]}
+  \begin{itemize}
+    \item \texttt{IF BOOL THEN} is a valid rule -> reduce
+    \item \texttt{ELSE} is a valid shift
+    \item Conflict: both are possible
+  \end{itemize}
 \end{frame}

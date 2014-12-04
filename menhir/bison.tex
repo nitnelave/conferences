@@ -1,11 +1,328 @@
-\section{How can you use Joomla! ?}
+\section{Comparison Menhir/Bison}
 \setcounter{subsection}{1}
 
+\begin{lrbox}{\codebox}
+  \begin{tcblisting}{listing only,title=Menhir: Basic arithmetics}
+E:
+| exp=E `+' term=T     { exp + term }
+| exp=E `-' term=T     { exp - term }
+| term=T               { term       }
+
+T:
+| term=T `*' factor=F  { term * factor }
+| num=T `/' denom=F    { num / denom   }
+| factor=F             { factor        }
+
+F:
+| n=NUMBER             { n    }
+| `-' neg=F            { -neg }
+| `(' exp=E `)'        { exp  }
+  \end{tcblisting}
+\end{lrbox}
 \begin{frame}
-\frametitle{Easy to set up}
-  \begin{itemize}[<+->]
-    \item Often included in hosting package
-    \item Easy manual installation
-    \item Not much configuration required
-  \end{itemize}
+\frametitle{Example Menhir grammar}
+  \usebox{\codebox}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Parametrized rules}
+  Target language:
+  \begin{verbatim}
+enum numbers {
+  one
+  two
+  three
+}
+
+enum forward;
+
+if (true) { do; stuff; }
+
+if (true);
+\end{verbatim}
+\end{frame}
+
+\lstset{basicstyle=\ttfamily\scriptsize}
+\begin{lrbox}{\codebox}
+  \begin{tcolorbox}[title=\centering{Parametrized rules}\\Bison\hspace{0.45\linewidth} Menhir,sidebyside]%
+  \begin{lstlisting}
+enum:
+  ENUM NAME
+  `{' value_list `}'
+| ENUM NAME `;'
+
+if_block:
+  IF `(' condition `)'
+  `{' statement_list `}'
+| IF `(' condition `)' `;'
+
+value_list:
+  %empty | value_list value
+
+stmt_list:
+  %empty | stmt_list stmt
+\end{lstlisting}
+\tcblower%
+  \begin{lstlisting}
+enum:
+  ENUM NAME
+  opt_block(list(value))
+
+if_block:
+  IF `(' condition `)'
+  opt_block(list(stmt))
+
+opt_block(INSIDE):
+| `{' INSIDE `}'
+| `;'
+  \end{lstlisting}
+  \end{tcolorbox}
+\end{lrbox}
+\begin{frame}
+  \frametitle{Parametrized rules}
+  \usebox{\codebox}
+\end{frame}
+
+\lstset{basicstyle=\ttfamily\tiny}
+\begin{lrbox}{\codebox}
+  \begin{tcolorbox}[title=\centering{Parametrized rules}\\Bison\hspace{0.45\linewidth} Menhir,sidebyside]%
+  \begin{lstlisting}
+enum:
+  ENUM NAME `{' value_list `}'
+  { $$ = new EnumNode($2, $4); }
+| ENUM NAME `;'
+  { $$ = new EnumNode($2, NULL); }
+
+if_block:
+  IF `(' condition `)'
+  `{' statement_list `}'
+  { $$ = new IfNode($3, $5); }
+| IF `(' condition `)' `;'
+  { $$ = new IfNode($3, Node()); }
+
+value_list:
+  %empty { $$ = new vector<Val>(); }
+| value_list value
+  { $1->append($2); $$ = $1; }
+
+stmt_list:
+  %empty { $$ = new vector<St>(); }
+| stmt_list stmt
+  { $1->append($2); $$ = $1; }
+\end{lstlisting}
+\tcblower%
+  \begin{lstlisting}
+enum:
+  ENUM name=NAME
+  block=opt_block(list(value))
+  { EnumNode (name, block) }
+
+if_block:
+  IF `(' cond=condition `)'
+  block=opt_block(list(stmt))
+  { let inside = match block with
+    | None -> EmptyNode
+    | Some a -> Node a
+    in IfNode inside }
+
+opt_block(INSIDE):
+| `{' res=INSIDE `}'
+  { Some res }
+| `;'    { None }
+  \end{lstlisting}
+  \end{tcolorbox}
+\end{lrbox}
+\begin{frame}
+  \frametitle{Parametrized rules}
+  \usebox{\codebox}
+\end{frame}
+
+
+\lstset{basicstyle=\ttfamily\small}
+\begin{lrbox}{\codebox}
+  \begin{tcolorbox}[title=\centering{\%inline}\\Bison\hspace{0.45\linewidth} Menhir,sidebyside]%
+  \begin{lstlisting}
+%left PLUS
+%left TIMES
+%%
+
+exp:
+  NUMBER
+| exp PLUS exp
+| exp TIMES exp
+\end{lstlisting}
+\tcblower%
+  \begin{lstlisting}
+%left PLUS
+%left TIMES
+%%
+
+exp:
+| NUMBER
+| exp op exp
+
+%inline op:
+| PLUS
+| TIMES
+  \end{lstlisting}
+  \end{tcolorbox}
+\end{lrbox}
+
+\begin{frame}
+  \frametitle{\%inline}
+  \usebox{\codebox}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{\%inline example}
+  Target language:
+  \begin{verbatim}
+a : int; //simple var
+b : int array; //array of int
+c : 0 : int array; //default value
+\end{verbatim}
+\end{frame}
+
+\lstset{basicstyle=\ttfamily\scriptsize}
+\begin{lrbox}{\codebox}
+  \begin{tcolorbox}[title=\centering{\%inline}\\Bison\hspace{0.45\linewidth} Menhir,sidebyside]%
+  \begin{lstlisting}
+program:
+  var | array
+
+var: IDENT `:' TYPE `;'
+
+array:
+  IDENT `:' TYPE ARRAY `;'
+| IDENT `:' VALUE `:'
+  TYPE ARRAY `;'
+\end{lstlisting}
+\tcblower%
+  \begin{lstlisting}
+program:
+  var | array
+
+var: IDENT `:' TYPE `;'
+
+array:
+  IDENT opt_value `:'
+  TYPE ARRAY `;'
+
+%inline opt_value:
+| (* empty *)
+| `:' VALUE
+  \end{lstlisting}
+  \end{tcolorbox}
+\end{lrbox}
+
+\begin{frame}
+  \frametitle{\%inline}
+  \usebox{\codebox}
+\end{frame}
+
+
+\begin{lrbox}{\codebox}
+  \begin{tcolorbox}[title=\centering{\%inline}\\Bison\hspace{0.45\linewidth} Menhir,sidebyside]%
+  \begin{lstlisting}
+program:
+  var | array
+
+var: IDENT `:' TYPE `;'
+
+array:
+  IDENT `:' TYPE ARRAY `;'
+| IDENT `:' VALUE `:'
+  TYPE ARRAY `;'
+\end{lstlisting}
+\tcblower%
+  \begin{lstlisting}
+program:
+  var | array
+
+var: IDENT `:' TYPE `;'
+
+array:
+  IDENT
+  ioption(preceded(`:',
+                   VALUE))
+  `:' TYPE ARRAY `;'
+  \end{lstlisting}
+  \end{tcolorbox}
+\end{lrbox}
+
+\begin{frame}
+  \frametitle{\%inline}
+  \usebox{\codebox}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{BNF example}
+  Target language:
+  \begin{verbatim}
+int a = { 2, 3, 5 }
+const int b = { 42 }
+\end{verbatim}
+\end{frame}
+
+\begin{lrbox}{\codebox}
+  \begin{tcolorbox}[title=\centering{BNF}\\Bison\hspace{0.45\linewidth} Menhir,sidebyside]%
+  \begin{lstlisting}
+program:
+  %empty
+| program statement
+
+statement:
+  opt_const INT IDENT
+  `=' `{' values `}'
+
+opt_const:
+  %empty
+| CONST
+
+values:
+  NUMBER
+| values NUMBER
+\end{lstlisting}
+\tcblower
+  \end{tcolorbox}
+\end{lrbox}
+
+\begin{frame}
+  \frametitle{\%inline}
+  \usebox{\codebox}
+\end{frame}
+\begin{lrbox}{\codebox}
+  \begin{tcolorbox}[title=\centering{BNF}\\Bison\hspace{0.45\linewidth} Menhir,sidebyside]%
+  \begin{lstlisting}
+program:
+  %empty
+| program statement
+
+statement:
+  opt_const INT IDENT
+  `=' `{' values `}'
+
+opt_const:
+  %empty
+| CONST
+
+values:
+  NUMBER
+| values NUMBER
+\end{lstlisting}
+\tcblower
+  \begin{lstlisting}
+program: statement*
+
+statement:
+  CONST? INT IDENT
+  `=' `{' NUMBER+ `}'
+  \end{lstlisting}
+  \end{tcolorbox}
+\end{lrbox}
+
+\begin{frame}
+  \frametitle{\%inline}
+  \usebox{\codebox}
 \end{frame}

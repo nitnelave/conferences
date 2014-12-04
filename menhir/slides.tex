@@ -21,6 +21,26 @@ bottom by=5mm}
 %\end{lrbox}
 %}
 %\renewcommand{\boxed}[2]{\begin{itemize}\end{itemize}}
+\newtcolorbox{bison}{
+  title=Bison,
+  enhanced,
+    bottom=1pt,
+    top=1pt,
+    arc=0pt,
+    boxrule=.4pt,
+    %before=\vskip-25pt,
+    oversize
+}
+\newtcolorbox{menhir}{
+  title=Menhir,
+  enhanced,
+    bottom=1pt,
+    top=1pt,
+    arc=0pt,
+    boxrule=.4pt,
+    %before=\vskip-25pt,
+    oversize
+}
 
 \usetheme{Frankfurt}
 \setbeamercovered{transparent}
@@ -57,7 +77,7 @@ bottom by=5mm}
 \end{frame}
 
 \begin{frame}
-  \tableofcontents[pausesections ]
+  \tableofcontents%[pausesections ]
 \end{frame}
 
 \input{intro.tex}
@@ -70,9 +90,10 @@ bottom by=5mm}
 \setcounter{subsection}{1}
 \begin{frame}
 \frametitle{Conclusion}
-  \begin{itemize}[<+->]
-    \item More powerful and flexible
+  \begin{itemize}
+    \item Many tools to facilitate parser writing
     \item Uses Ocaml
+    \item Bigger parser (but is it a problem?)
   \end{itemize}
 \end{frame}
 
