@@ -139,7 +139,7 @@ statement:
   \frametitle{Shift/reduce conflict: details}
   \texttt{[> IF BOOL THEN IF BOOL THEN statement $\rightarrow$ ELSE <]}
   \begin{itemize}
-    \item \texttt{IF BOOL THEN} is a valid rule -> reduce
+    \item \texttt{IF BOOL THEN statement} is a valid rule -> reduce
     \item \texttt{ELSE} is a valid shift
     \item Conflict: both are possible
   \end{itemize}

@@ -185,6 +185,127 @@ c : 0 : int array; //default value
 \end{frame}
 
 \lstset{basicstyle=\ttfamily\scriptsize}
+
+\begin{lrbox}{\codebox}
+  \begin{tcolorbox}[title=\centering{First shot}\\Bison\hspace{0.45\linewidth} Menhir,sidebyside]%
+  \begin{lstlisting}
+program:
+  var | array
+
+var: IDENT COLON TYPE
+     SEMICOLON
+
+array:
+  IDENT opt_value COLON
+  TYPE ARRAY SEMICOLON
+
+opt_value:
+|  COLON VALUE
+\end{lstlisting}
+\tcblower%
+  \begin{lstlisting}
+program:
+| variable {}
+| arr {}
+
+variable:
+| IDENT COLON TYPE
+  SEMICOLON {}
+
+arr:
+| IDENT option(VALUE) COLON
+  TYPE ARRAY SEMICOLON {}
+  \end{lstlisting}
+  \end{tcolorbox}
+\end{lrbox}
+
+\begin{frame}
+  \frametitle{First shot}
+  \usebox{\codebox}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Conflict explanation: Bison}
+  \begin{lstlisting}
+Rules never reduced
+
+    5 opt_value: /* empty */
+
+
+State 1 conflicts: 1 shift/reduce
+
+...
+
+
+state 1
+
+    3 var: IDENT . COLON TYPE SEMICOLON
+    4 array: IDENT . opt_value COLON TYPE ARRAY SEMICOLON
+
+    COLON  shift, and go to state 5
+
+    COLON  [reduce using rule 5 (opt_value)]
+
+    opt_value  go to state 6
+    \end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Conflict explanation: Menhir}
+  \begin{lstlisting}
+
+** Conflict (shift/reduce) in state 1.
+** Token involved: COLON
+** This state is reached from program after reading:
+
+IDENT
+
+** The derivations that appear below have the following
+** common factor:
+** (The question mark symbol (?) represents the spot where
+** the derivations begin to differ.)
+
+program
+(?)
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Conflict explanation: Menhir}
+  \begin{lstlisting}
+
+** In state 1, looking ahead at COLON, reducing production
+** option(VALUE) ->
+** is permitted because of the following sub-derivation:
+
+arr
+IDENT option(VALUE) COLON TYPE ARRAY SEMICOLON
+      .
+// lookahead token appears
+
+** In state 1, looking ahead at COLON, shifting is permitted
+** because of the following sub-derivation:
+
+variable
+IDENT . COLON TYPE SEMICOLON
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Conflict explanation: Menhir}
+  \begin{lstlisting}
+State 1:
+arr -> IDENT . option(VALUE) COLON TYPE ARRAY SEMICOLON [ # ]
+variable -> IDENT . COLON TYPE SEMICOLON [ # ]
+-- On VALUE shift to state 2
+-- On COLON shift to state 3
+-- On option(VALUE) shift to state 6
+-- On COLON reduce production option(VALUE) ->
+** Conflict on COLON
+    \end{lstlisting}
+\end{frame}
+\lstset{basicstyle=\ttfamily\scriptsize}
 \begin{lrbox}{\codebox}
   \begin{tcolorbox}[title=\centering{\%inline}\\Bison\hspace{0.45\linewidth} Menhir,sidebyside]%
   \begin{lstlisting}
@@ -289,7 +410,7 @@ values:
 \end{lrbox}
 
 \begin{frame}
-  \frametitle{\%inline}
+  \frametitle{BNF}
   \usebox{\codebox}
 \end{frame}
 \begin{lrbox}{\codebox}
@@ -323,6 +444,17 @@ statement:
 \end{lrbox}
 
 \begin{frame}
-  \frametitle{\%inline}
+  \frametitle{BNF}
   \usebox{\codebox}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Split files advantage}
+  \begin{itemize}
+    \item Split the grammar into several files
+    \item Modular, organized, not one huge file
+    \item Separate headers from the grammar
+    \item Several grammars for one set of tokens
+  \end{itemize}
 \end{frame}
