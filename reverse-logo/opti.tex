@@ -1,0 +1,93 @@
+\section{Optimization}
+
+\begin{frame}
+\frametitle{Dijkstra: distance}
+  \begin{itemize}
+    \item Distance in number of instructions
+    \item Small factor for actual distance
+  \end{itemize}
+  \emph{Heisenberg index: 22 000}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\texttt{repeat}}
+  \begin{itemize}
+    \item Add \texttt{repeat} for ``\texttt{forward x left 90}``
+  \end{itemize}
+  \visible<1->{\emph{Heisenberg index: 17 000}}
+
+  \visible<2->{\begin{itemize}
+    \item Add \texttt{repeat} for blocks of n
+  \end{itemize}
+  \emph{Heisenberg index: 8 500}}
+
+  \visible<3->{\begin{itemize}
+    \item Add \texttt{repeat} inside \texttt{repeat}
+  \end{itemize}
+
+  \emph{Heisenberg index: 8 450}}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Functions}
+  \begin{itemize}
+    \item Add functions for ``\texttt{forward x left 90}'' for $x = 1\text{ to }26$
+  \end{itemize}
+  \emph{Heisenberg index: 6 230}
+
+  \visible<2->{\begin{itemize}
+    \item visible declare functions worth it
+  \end{itemize}
+  \emph{Heisenberg index: 6 150}}
+
+  \visible<3->{\begin{itemize}
+    \item Functions calling functions (analyze n-grams, many times)
+  \end{itemize}
+  \emph{Heisenberg index: {\color{red}5 122}}}
+
+  \visible<4->{\begin{itemize}
+    \item Obfuscate function names (just for fun)
+  \end{itemize}}
+
+
+\end{frame}
+
+\section {Conclusion}
+
+\begin{frame}
+\frametitle{Doing better? -- points}
+  \begin{itemize}
+    \item More theoretical approach
+    \item Minimal rectangle covering
+    \item Shortest line to cover them (simulated annealing?)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Doing better? -- lines}
+  \begin{itemize}
+    \item Optimization algorithm
+    \item Which n-gram replace?
+    \item \texttt{repeat} inside functions
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Doing better? -- overall}
+  \begin{itemize}
+    \item Not the shortest line
+    \item The one with the least instructions
+    \item Both components go hand-in-hand
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Have a look at the code}
+  \begin{itemize}
+    \item Not the cleanest
+    \item Python
+    \item \url{http://github.com/nitnelave/reverse-logo}
+    \item \url{http://logo.twentygototen.org}
+  \end{itemize}
+\end{frame}

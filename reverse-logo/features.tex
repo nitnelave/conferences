@@ -1,0 +1,67 @@
+\section{Logo from an image}
+
+\begin{frame}
+\frametitle{Objective}
+  \begin{itemize}
+    \item Perfect copy
+    \item As short as possible
+    \item Obfuscated?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Limitations}
+  \begin{itemize}
+    \item One SCC
+    \item At least one point in the middle
+    \item Small image
+  \end{itemize}
+\end{frame}
+
+\subsection{Image to lines}
+
+\begin{frame}
+\frametitle{Explore}
+  \begin{itemize}
+    \item Start to the right (and down)
+    \item Next to down (and left)
+    \item Next left (and up)
+    \item \ldots
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Dijkstra}
+  \begin{itemize}
+    \item Shortest path algorithm
+    \item Stops at first white pixel
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Main loop}
+\begin{verbatim}
+repeat much [
+  explore
+  dijkstra
+]
+\end{verbatim}
+\end{frame}
+
+\subsection{Lines to logo}
+\begin{frame}
+\frametitle{Point reduction}
+  \begin{itemize}
+    \item Eliminate points in a straight line
+    \item $\implies$ \emph{way} less points
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Generate basic instructions}
+  \begin{itemize}
+    \item \texttt{forward 10 right 90}
+    \item Twice as many instructions as points
+  \end{itemize}
+  \emph{Heisenberg index: 200 000}
+\end{frame}

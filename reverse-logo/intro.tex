@@ -1,0 +1,76 @@
+\section{Logomatig}
+\begin{frame}
+\frametitle{What is Logomatig ?}
+  \begin{itemize}
+    \item \emph{Very} simple language
+    \item Control a turtle
+    \item Draw pretty things!
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{The language -- Basics}
+  \begin{itemize}
+    \item \texttt{forward \emph{n}}
+    \item \texttt{right \emph{n}}
+    \item \texttt{left \emph{n}}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The language -- Basics}
+\begin{verbatim}
+forward 50
+left 90
+forward 20
+\end{verbatim}
+
+\begin{center}
+\begin{tikzpicture}
+  \draw (0, 0) -- (5, 0);
+  \draw (5, 0) -- (5, 2);
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{The language -- \texttt{repeat}}
+\begin{verbatim}
+repeat 4 [
+  forward 20
+  left 90
+]
+\end{verbatim}
+
+\begin{center}
+\begin{tikzpicture}
+  \draw (0, 0) -- (3, 0);
+  \draw (3, 0) -- (3, 3);
+  \draw (3, 3) -- (0, 3);
+  \draw (0, 3) -- (0, 0);
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{The language -- \texttt{to} and \texttt{end}}
+\begin{verbatim}
+to line
+  forward 20
+  left 90
+end
+repeat 4 [
+  line
+]
+\end{verbatim}
+
+\begin{center}
+\begin{tikzpicture}
+  \draw (0, 0) -- (3, 0);
+  \draw (3, 0) -- (3, 3);
+  \draw (3, 3) -- (0, 3);
+  \draw (0, 3) -- (0, 0);
+\end{tikzpicture}
+\end{center}
+\end{frame}
+

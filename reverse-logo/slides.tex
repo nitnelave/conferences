@@ -1,0 +1,60 @@
+\documentclass{beamer}
+
+\usepackage[english]{babel}
+\usepackage{color}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{pgfgantt}
+
+\usetheme{Frankfurt}
+\setbeamercovered{transparent}
+
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{navigation symbols}{}
+
+\newlength{\wideitemsep}
+\setlength{\wideitemsep}{\itemsep}
+\addtolength{\wideitemsep}{5pt}
+\let\olditem\item
+\renewcommand{\item}{\setlength{\itemsep}{\wideitemsep}\olditem}
+
+
+
+\title{Reverse logo}
+\author{Valentin Tolmer}
+\date{}
+\institute{Nuit de l'info -- EPITA 2015}
+
+
+
+\AtBeginSection[]
+{
+  \begin{frame}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+    \includegraphics[height=60pt]{../assets/logo-epita-hd.png}
+\end{frame}
+
+\begin{frame}
+  \tableofcontents[pausesections ]
+\end{frame}
+
+\input{intro.tex}
+
+\input{features.tex}
+
+\input{opti.tex}
+
+\begin{frame}
+\frametitle{Questions}
+  Questions?
+\end{frame}
+
+\end{document}
